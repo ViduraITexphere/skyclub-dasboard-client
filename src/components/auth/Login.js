@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { jwtDecode } from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode' // Ensure this is correctly imported
 
 function Login() {
   const navigate = useNavigate()
-  const [itinerary, setItinerary] = useState([])
+  const [itinerary, setItinerary] = useState(null)
   console.log('itinerary😅:', itinerary)
 
   const handleSuccess = async (credentialResponse) => {
@@ -15,10 +15,10 @@ function Login() {
 
       // Decode the token received from Google
       const decodedToken = jwtDecode(credential)
+      console.log('Decoded Token:', decodedToken)
 
       // Save the Google ID directly to localStorage
       localStorage.setItem('googleId', decodedToken.sub) // 'sub' contains the Google ID
-
       console.log('Google ID saved:', decodedToken.sub)
 
       // Fetch itinerary using the token in the Authorization header
@@ -35,7 +35,7 @@ function Login() {
       )
 
       console.log('itinerary🥵:', itineraryResponse.data)
-      setItinerary(itineraryResponse.data)
+      setItinerary(itineraryResponse.data) // Update the state with the response data
 
       // Navigate to ItineraryPage with the fetched data
       navigate('/itinerary', { state: { itinerary: itineraryResponse.data } })
