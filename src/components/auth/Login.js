@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -6,6 +6,8 @@ import { jwtDecode } from 'jwt-decode'
 
 function Login() {
   const navigate = useNavigate()
+  const [itinerary, setItinerary] = useState([])
+  console.log('itinerary😅:', itinerary)
 
   const handleSuccess = async (credentialResponse) => {
     try {
@@ -32,7 +34,8 @@ function Login() {
         },
       )
 
-      console.log('itinerary:', itineraryResponse.data)
+      console.log('itinerary🥵:', itineraryResponse.data)
+      setItinerary(itineraryResponse.data)
 
       // Navigate to ItineraryPage with the fetched data
       navigate('/itinerary', { state: { itinerary: itineraryResponse.data } })

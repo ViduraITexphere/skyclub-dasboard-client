@@ -7,7 +7,7 @@ const ItineraryPage = () => {
   const location = useLocation()
   const itinerary = location.state?.itinerary || []
 
-  console.log('Itinerary from location state:', itinerary)
+  console.log('Itinerary from location state:', itinerary.itinerary)
 
   if (itinerary.length === 0) {
     return <div>No itinerary data available.</div>
@@ -24,7 +24,7 @@ const ItineraryPage = () => {
             <p className="text-body-secondary small">
               Click the accordions below to expand/collapse the itinerary content.
             </p>
-            <ItineraryAccordion itinerary={itinerary} />
+            <ItineraryAccordion itinerary={itinerary.itinerary} />
           </CCardBody>
         </CCard>
       </CCol>
